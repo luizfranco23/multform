@@ -3,6 +3,8 @@ import * as S from './styles';
 import profile from '../../img/profile.svg';
 import book from '../../img/book.svg';
 import mail from '../../img/mail.svg';
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 
 interface State {
     name: string;
@@ -38,6 +40,7 @@ const profiles = [
 ];
 
 export function HomeForm() {
+    const [modalIsOpen, setIsOpen] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
     const [typedText, setTypedText] = useState('');
     const originalText = 'Cadastro de Desenvolvedor';
@@ -48,6 +51,14 @@ export function HomeForm() {
         email: '',
         github: ''
     });
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
 
     useEffect(() => {
         let charIndex = 0;
@@ -226,14 +237,40 @@ export function HomeForm() {
                                 <button
                                     disabled={isEmailEmpty || isGitEmpty}
                                     className={(isEmailEmpty || isGitEmpty) ? 'disabled-button' : ''}
+                                    onClick={openModal}
                                 >
                                     Enviar dados
                                 </button>
+                                <Modal
+                                    isOpen={modalIsOpen}
+                                    onRequestClose={closeModal}
+                                    contentLabel="Modal de exemplo"
+                                    className="custom-modal"
+                                    overlayClassName="custom-overlay"
+                                >
+                                    <h1>Cadastro finalizado! ✅ </h1>
+                                    <h2>Obrigado {state.name}, seu dados foram enviados com sucesso 😎 🥳 🤩</h2>
+                                    <div>
+                                        <span className="phrase">
+                                            Agora é só aguardar. Nossa equipe entrará em contato nos próximos dias. Não se esqueça de verificar seu email ({state.email}), inclusive a pasta de spam.
+                                        </span>
+                                        <div>
+                                            <button
+                                                onClick={() => {
+                                                    closeModal();
+                                                    setCurrentStep(1);
+                                                }}
+                                                className="modal-button"
+                                            >
+                                                Fechar</button>
+                                        </div>
+                                    </div>
+                                </Modal>
                             </S.ContainerMail>
                         )}
                     </S.Pages>
                 </S.Step>
             </S.AreaForm>
-        </S.Container>
+        </S.Container >
     );
 }
