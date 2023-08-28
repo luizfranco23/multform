@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import * as S from './styles';
 import profile from '../../img/profile.svg';
 import book from '../../img/book.svg';
@@ -38,6 +38,9 @@ const profiles = [
 ];
 
 export function HomeForm() {
+    const [currentStep, setCurrentStep] = useState(1);
+    const [typedText, setTypedText] = useState('');
+    const originalText = 'Cadastro de Desenvolvedor';
     const [selectedOption, setSelectedOption] = useState<string>("Iniciante");
     const [state, dispatch] = useReducer(reducer, {
         name: '',
@@ -46,7 +49,22 @@ export function HomeForm() {
         github: ''
     });
 
-    const [currentStep, setCurrentStep] = useState(1);
+    useEffect(() => {
+        let charIndex = 0;
+        const typingInterval = setInterval(() => {
+            if (charIndex < originalText.length) {
+                setTypedText(originalText.substring(0, charIndex + 1));
+                charIndex++;
+            } else {
+                clearInterval(typingInterval);
+            }
+        }, 100);
+
+        return () => {
+            clearInterval(typingInterval);
+        };
+    }, [currentStep]);
+
 
     const handleNextStep = () => {
         if (currentStep < 3) {
@@ -84,10 +102,10 @@ export function HomeForm() {
     return (
         <S.Container>
             <S.AreaForm>
-                <S.Header>
-                    <h1>Cadastro de Desenvolvedor</h1>
+                <S.StyledHeader>
+                    <h1> <span>{typedText}</span></h1>
                     <p>Preencha os dados abaixo</p>
-                </S.Header>
+                </S.StyledHeader>
                 <S.Step>
                     <S.SideBar>
                         {profiles.map((profile, index) => (
@@ -209,7 +227,7 @@ export function HomeForm() {
                                     disabled={isEmailEmpty || isGitEmpty}
                                     className={(isEmailEmpty || isGitEmpty) ? 'disabled-button' : ''}
                                 >
-                                    Próximo
+                                    Enviar dados
                                 </button>
                             </S.ContainerMail>
                         )}

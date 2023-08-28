@@ -1,9 +1,23 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background: #02044a;
+  background: linear-gradient(45deg, #120c56, #000000, #1d267d, #d4adfc);
+  background-size: 300% 300%;
   color: #fff;
   min-height: 100vh;
+  animation: colors 8s infinite ease;
+
+  @keyframes colors {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 `;
 
 export const AreaForm = styled.div`
@@ -14,7 +28,7 @@ export const AreaForm = styled.div`
   flex-direction: column;
 `;
 
-export const Header = styled.div`
+export const StyledHeader = styled.div`
   width: 100%;
   padding: 25px 0;
   border-bottom: 1px solid #16195c;
@@ -22,6 +36,14 @@ export const Header = styled.div`
   h1 {
     margin: 0;
     padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+
+    span {
+      display: inline-block;
+      opacity: 1;
+    }
   }
 
   p {
@@ -125,18 +147,24 @@ export const ContainerName = styled.div`
 
   button {
     width: 25%;
-    background-color: #25cd89;
-    color: #fff;
+    background-color: transparent;
+    color: #25cd89;
     font-size: 14px;
     padding: 20px 40px;
-    border: 0;
+    border: 2px solid #25cd89;
     border-radius: 30px;
     cursor: pointer;
     margin-top: 25px;
+    transition: 1s;
+
+    &:hover {
+      background-color: #25cd89;
+      color: #fff;
+    }
   }
 
   .disabled-button {
-    opacity: 0.5;
+    opacity: 0.2;
     pointer-events: none;
   }
 `;
@@ -187,14 +215,20 @@ export const ContainerTime = styled.div`
 
   button {
     width: 25%;
-    background-color: #25cd89;
-    color: #fff;
+    background-color: transparent;
+    color: #25cd89;
     font-size: 14px;
     padding: 20px 40px;
-    border: 0;
+    border: 2px solid #25cd89;
     border-radius: 30px;
     cursor: pointer;
     margin-top: 25px;
+    transition: 1s;
+
+    &:hover {
+      background-color: #25cd89;
+      color: #fff;
+    }
   }
 
   .selected {
@@ -252,18 +286,24 @@ export const ContainerMail = styled.div`
 
   button {
     width: 25%;
-    background-color: #25cd89;
-    color: #fff;
+    background-color: transparent;
+    color: #25cd89;
     font-size: 14px;
     padding: 20px 40px;
-    border: 0;
+    border: 2px solid #25cd89;
     border-radius: 30px;
     cursor: pointer;
     margin-top: 25px;
+    transition: 1s;
+
+    &:hover {
+      background-color: #25cd89;
+      color: #fff;
+    }
   }
 
   .disabled-button {
-    opacity: 0.5;
+    opacity: 0.2;
     pointer-events: none;
   }
 `;
