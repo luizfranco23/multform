@@ -249,7 +249,7 @@ export function HomeForm() {
                                     overlayClassName="custom-overlay"
                                 >
                                     <h1>Cadastro finalizado! ✅ </h1>
-                                    <h2>Obrigado {state.name}, seu dados foram enviados com sucesso 😎 🥳 🤩 </h2>
+                                    <h2>Obrigado {state.name}, seu dados foram enviados com sucesso 😎🥳🤩 </h2>
                                     <div>
                                         <span className="phrase">
                                             Agora é só aguardar. Nossa equipe entrará em contato nos próximos dias. Não se esqueça de verificar seu email ({state.email}), inclusive a pasta de spam.
